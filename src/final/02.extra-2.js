@@ -11,7 +11,7 @@ function Greeting({initialName = ''}) {
 
   React.useEffect(() => {
     window.localStorage.setItem('name', name)
-  }, [name])
+  }, [name]) //Dependency array: re-renders only when name dependency changes
 
   function handleChange(event) {
     setName(event.target.value)

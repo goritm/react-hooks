@@ -6,6 +6,8 @@ import React from 'react'
 
 function Greeting({initialName = ''}) {
   const [name, setName] = React.useState(
+    //Lazy State Init: Only executes when the component is rendered the first time
+    //It is recommended just to use lazy initialization feature when needed (computationally expensive)
     () => window.localStorage.getItem('name') || initialName,
   )
 

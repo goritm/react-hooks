@@ -4,6 +4,7 @@
 
 import React from 'react'
 
+//Custom Hook
 function useLocalStorageState(key, defaultValue = '') {
   const [state, setState] = React.useState(
     () => window.localStorage.getItem(key) || defaultValue,

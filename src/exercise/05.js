@@ -6,30 +6,23 @@ import React from 'react'
 import VanillaTilt from 'vanilla-tilt'
 
 function Tilt({children}) {
-  // 🐨 create a ref here with React.useRef()
+  const tiltRef = React.useRef() //We create the reference to the DOM node but it is undefined
+  // console.log(tiltRef.current)
+  React.useEffect(() => {
+    const tiltNode = tiltRef.current //We are getting the DOM node value with the current prop
 
-  // 🐨 add a `React.useEffect` callback here and use VanillaTilt to make your
-  // div look fancy.
-  // 💰 like this:
-  // const tiltNode = tiltRef.current
-  // VanillaTilt.init(tiltNode, {
-  //   max: 25,
-  //   speed: 400,
-  //   glare: true,
-  //   'max-glare': 0.5,
-  // })
-  //
-  // 💰 Don't forget to return a cleanup function. VanillaTilt.init will add an
-  // object to your DOM node to cleanup:
-  // `return () => tiltNode.vanillaTilt.destroy()`
-  //
-  // 💰 Don't forget to specify your effect's dependencies array! In our case
-  // we know that the tilt node will never change, so make it `[]`. Ask me about
-  // this for a more in depth explanation.
+    VanillaTilt.init(tiltNode, {
+      max: 25,
+      speed: 100,
+      glare: true,
+      'max-glare': 0.2,
+    })
 
-  // 🐨 add the `ref` prop to the `tilt-root` div here:
+    return () => tiltNode.vanillaTilt.destroy() //We return a cleanup function, that executes when the component dismounts
+  }, []) //If we don't specify our effect's dependencies array, the component depends of everything, but we know that tiltNode doesn't changes, so we use []
+
   return (
-    <div className="tilt-root">
+    <div className="tilt-root" ref={tiltRef}>
       <div className="tilt-child">{children}</div>
     </div>
   )
@@ -38,7 +31,7 @@ function Tilt({children}) {
 function App() {
   return (
     <Tilt>
-      <div className="totally-centered">vanilla-tilt.js</div>
+      <div className="totally-centered">gorimobile</div>
     </Tilt>
   )
 }
